@@ -22,7 +22,7 @@ set $mod Mod4
 # chose a FreeType font, such as:
 #font pango:DejaVu Sans Mono 8
 
-font pango:WenQuanYi Micro Hei 8
+font pango:文泉驿等宽微米黑 8
 
 #####
 #
