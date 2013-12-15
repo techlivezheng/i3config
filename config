@@ -112,6 +112,10 @@ bindsym $mod+Shift+l move right
 bindsym $mod+p workspace prev
 bindsym $mod+n workspace next
 
+# switch between the current and the previously focused one
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth
+
 # switch to workspace
 bindsym $mod+1 workspace number 1; scratchpad show
 bindsym $mod+2 workspace number 2; scratchpad show
