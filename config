@@ -109,8 +109,8 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # change workspace
-bindsym $mod+Control+h workspace prev
-bindsym $mod+Control+l workspace next
+bindsym $mod+p workspace prev
+bindsym $mod+n workspace next
 
 # switch to workspace
 bindsym $mod+1 workspace number 1; scratchpad show
