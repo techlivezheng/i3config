@@ -36,7 +36,9 @@ bindsym $mod+q kill
 # start i3-dmenu-desktop as program launcher
 # It is a wrapper around dmenu, which only displays applications shipping a
 # .desktop file, so dmenu needs to be installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --entry-type=filename --entry-type=command --entry-type=name
+# Use xft patched dmenu in order to use customized fonts to show UTF-8
+# characters
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "文泉驿等宽微米黑-8"' --entry-type=filename --entry-type=command --entry-type=name
 
 # start a terminal
 bindsym $mod+Return exec gnome-terminal
