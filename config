@@ -26,6 +26,15 @@ font pango:文泉驿等宽微米黑 8
 
 #####
 #
+# Behaviors
+#
+#####
+
+# Do not changing focus on mouse moving
+focus_follows_mouse no
+
+#####
+#
 # Basic Key Bindings
 #
 #####
