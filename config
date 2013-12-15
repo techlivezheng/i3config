@@ -36,6 +36,9 @@ focus_follows_mouse no
 # Wrapper the focus between containers in the same level
 force_focus_wrapping yes
 
+# Switch back and forth when pressing workspace changing key bindings
+workspace_auto_back_and_forth yes
+
 #####
 #
 # Basic Key Bindings
