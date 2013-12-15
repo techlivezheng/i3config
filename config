@@ -36,7 +36,7 @@ bindsym $mod+q kill
 # start i3-dmenu-desktop as program launcher
 # It is a wrapper around dmenu, which only displays applications shipping a
 # .desktop file, so dmenu needs to be installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --entry-type=filename --entry-type=command --entry-type=name
 
 # start a terminal
 bindsym $mod+Return exec gnome-terminal
