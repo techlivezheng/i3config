@@ -234,6 +234,7 @@ for_window [class="screengrab"] floating enable
 ###
 
 exec --no-startup-id volumeicon
+exec --no-startup-id sh ~/.fehbg
 
 ####
 #
