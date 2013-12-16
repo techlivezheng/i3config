@@ -194,7 +194,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # lock i3
-bindsym $mod+Control+Return exec i3lock -c 000000
+bindsym $mod+Control+Return exec "sudo xset +dpms && xset s on; i3lock -c 000000"
 
 #####
 #
