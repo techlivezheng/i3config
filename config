@@ -112,8 +112,8 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # change workspace
-bindsym $mod+p workspace prev
-bindsym $mod+n workspace next
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 
 # switch between the current and the previously focused one
 bindsym $mod+b workspace back_and_forth
