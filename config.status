@@ -21,13 +21,13 @@ order += "wireless wlp5s0"
 
 # DHCP
 run_watch DHCP {
-        pidfile = "/var/run/dhcpcd*.pid"
+        pidfile = "/run/dhcpcd*.pid"
 }
 order += "run_watch DHCP"
 
 # VPN
 run_watch VPN {
-        pidfile = "/var/run/vpnc/pid"
+        pidfile = "/run/vpnc/pid"
 }
 order += "run_watch VPN"
 
