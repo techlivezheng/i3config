@@ -33,6 +33,9 @@ font pango:文泉驿等宽微米黑 8
 # Do not changing focus on mouse moving
 focus_follows_mouse no
 
+# Wrapper the focus between containers in the same level
+force_focus_wrapping yes
+
 #####
 #
 # Basic Key Bindings
