@@ -206,6 +206,7 @@ bindsym $mod+Control+Return exec "sudo xset +dpms && xset s on; i3lock -c 000000
 # finds out, if available)
 bar {
     position top
+    tray_output primary
     status_command i3status -c ~/.i3/config.status
 }
 
