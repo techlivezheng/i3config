@@ -53,7 +53,7 @@ bindsym $mod+q kill
 # .desktop file, so dmenu needs to be installed.
 # Use xft patched dmenu in order to use customized fonts to show UTF-8
 # characters
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "文泉驿等宽微米黑-8"' --entry-type=filename --entry-type=command --entry-type=name
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "文泉驿等宽微米黑-10"' --entry-type=filename --entry-type=command --entry-type=name
 
 # start a terminal
 bindsym $mod+Return exec gnome-terminal
@@ -205,6 +205,7 @@ bindsym $mod+Control+Return exec "sudo xset +dpms && xset s on; i3lock -c 000000
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+    font pango:文泉驿等宽微米黑 8
     position top
     tray_output primary
     status_command i3status -c ~/.i3/config.status
