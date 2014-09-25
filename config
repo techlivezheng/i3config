@@ -272,6 +272,7 @@ for_window [class="^Nautilus$" instance="^file_progress$"] floating enable
 #
 ###
 
+exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id sh ~/.fehbg
 exec --no-startup-id ibus-daemon --xim -d -r
