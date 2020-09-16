@@ -4,6 +4,12 @@
 
 set $mod Mod4
 
+set $output_main eDP1
+#set $output_main HDMI1
+#set $output_aside HDMI1
+set $output_aside DP1
+#set $output_aside eDP1
+
 #####
 #
 # Fonts
@@ -37,7 +43,7 @@ focus_follows_mouse no
 force_focus_wrapping no
 
 # Switch back and forth when pressing workspace changing key bindings
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 
 #####
 #
@@ -46,14 +52,39 @@ workspace_auto_back_and_forth yes
 #####
 
 # kill focused window
-bindsym $mod+q kill
+
+set $close "Close the window? (y/n)"
+
+mode $close {
+    bindsym y kill, mode default
+    bindsym Return kill, mode default
+
+    bindsym n mode default
+    bindsym Escape mode default
+}
+
+bindsym $mod+q mode $close
+
+bindsym $mod+Shift+q kill
 
 # start i3-dmenu-desktop as program launcher
 # It is a wrapper around dmenu, which only displays applications shipping a
 # .desktop file, so dmenu needs to be installed.
 # Use xft patched dmenu in order to use customized fonts to show UTF-8
 # characters
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "文泉驿等宽微米黑-10"' --entry-type=filename --entry-type=command --entry-type=name
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "文泉驿等宽微米黑-10"' --entry-type=filename --entry-type=command --entry-type=name
+
+# start j4-dmenu-desktop as program launcher
+# It is a wrapper around dmenu, which only displays applications shipping a
+# .desktop file, so dmenu needs to be installed.
+# Use xft patched dmenu in order to use customized fonts to show UTF-8
+# characters
+#bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --display-binary --no-generic
+
+bindsym $mod+d exec --no-startup-id rofi -show combi
+
+#bindsym $mod+s exec --no-startup-id layout_manager.sh
+bindsym $mod+s exec --no-startup-id gpaste-menu
 
 # start a terminal
 bindsym $mod+Return exec gnome-terminal
@@ -66,7 +97,7 @@ bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+w layout tabbed
-bindsym $mod+s layout stacking
+bindsym $mod+t layout stacking
 bindsym $mod+e layout toggle split
 
 # split in vertical orientation
@@ -112,12 +143,46 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # change workspace
-bindsym $mod+Tab workspace next
+bindsym $mod+Tab exec --no-startup-id bash -c '/usr/bin/notify-send -t 1000 "Switch to workspace $(i3-msg -t get_workspaces | jq ".[] | select(.focused==true).name" | cut -d"\\\\"" -f2)"', workspace next
 bindsym $mod+Shift+Tab workspace prev
 
 # switch between the current and the previously focused one
-bindsym $mod+b workspace back_and_forth
-bindsym $mod+Shift+b move container to workspace back_and_forth
+bindsym $mod+z workspace back_and_forth
+bindsym $mod+Shift+z move container to workspace back_and_forth
+
+
+# What is the use of this?
+mode "wswitch" {
+    # focus the parent container
+    bindsym $mod+a focus parent
+
+    # focus the child container
+    bindsym $mod+Shift+a focus child
+
+    # change focus
+    bindsym $mod+h focus left bindsym $mod+j focus down bindsym $mod+k focus up
+    bindsym $mod+l focus right
+
+    # move focused window
+    bindsym $mod+Shift+h move left
+    bindsym $mod+Shift+j move down
+    bindsym $mod+Shift+k move up
+    bindsym $mod+Shift+l move right
+
+    # change workspace
+    bindsym $mod+Tab workspace next
+    bindsym $mod+Shift+Tab workspace prev
+
+    # switch between the current and the previously focused one
+    bindsym $mod+b workspace back_and_forth
+    bindsym $mod+Shift+b move container to workspace back_and_forth
+
+    # .....
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Mod1+space mode "wswitch"
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
@@ -130,6 +195,18 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
+
+# switch to workspace
+bindsym $mod+Mod1+1 workspace number 11
+bindsym $mod+Mod1+2 workspace number 12
+bindsym $mod+Mod1+3 workspace number 13
+bindsym $mod+Mod1+4 workspace number 14
+bindsym $mod+Mod1+5 workspace number 15
+bindsym $mod+Mod1+6 workspace number 16
+bindsym $mod+Mod1+7 workspace number 17
+bindsym $mod+Mod1+8 workspace number 18
+bindsym $mod+Mod1+9 workspace number 19
+bindsym $mod+Mod1+0 workspace number 20
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
@@ -144,34 +221,28 @@ bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
 # move focused container to workspace
-bindsym $mod+Control+1 move container to workspace number 1; workspace number 1
-bindsym $mod+Control+2 move container to workspace number 2; workspace number 2
-bindsym $mod+Control+3 move container to workspace number 3; workspace number 3
-bindsym $mod+Control+4 move container to workspace number 4; workspace number 4
-bindsym $mod+Control+5 move container to workspace number 5; workspace number 5
-bindsym $mod+Control+6 move container to workspace number 6; workspace number 6
-bindsym $mod+Control+7 move container to workspace number 7; workspace number 7
-bindsym $mod+Control+8 move container to workspace number 8; workspace number 8
-bindsym $mod+Control+9 move container to workspace number 9; workspace number 9
-bindsym $mod+Control+0 move container to workspace number 10; workspace number 10
+bindsym $mod+Mod1+Shift+1 move container to workspace number 11, workspace number 11
+bindsym $mod+Mod1+Shift+2 move container to workspace number 12, workspace number 12
+bindsym $mod+Mod1+Shift+3 move container to workspace number 13, workspace number 13
+bindsym $mod+Mod1+Shift+4 move container to workspace number 14, workspace number 14
+bindsym $mod+Mod1+Shift+5 move container to workspace number 15, workspace number 15
+bindsym $mod+Mod1+Shift+6 move container to workspace number 16, workspace number 16
+bindsym $mod+Mod1+Shift+7 move container to workspace number 17, workspace number 17
+bindsym $mod+Mod1+Shift+8 move container to workspace number 18, workspace number 18
+bindsym $mod+Mod1+Shift+9 move container to workspace number 19, workspace number 19
+bindsym $mod+Mod1+Shift+0 move container to workspace number 20, workspace number 20
 
-# move workspace to outputs
-bindsym $mod+Control+h move workspace to output left
-bindsym $mod+Control+j move workspace to output down
-bindsym $mod+Control+k move workspace to output up
-bindsym $mod+Control+l move workspace to output right
-
-bindsym $mod+x move workspace to output VGA1
-bindsym $mod+Shift+x move workspace to output LVDS1
-
-# move container to outputs
-bindsym $mod+Control+Shift+h move container to output left
-bindsym $mod+Control+Shift+j move container to output down
-bindsym $mod+Control+Shift+k move container to output up
-bindsym $mod+Control+Shift+l move container to output right
-
-bindsym $mod+o move container to output VGA1
-bindsym $mod+Shift+o move container to output LVDS1
+# Switch to workspace all thother
+bindsym $mod+Control+1 workspace number 11, workspace number 1
+bindsym $mod+Control+2 workspace number 12, workspace number 2
+bindsym $mod+Control+3 workspace number 13, workspace number 3
+bindsym $mod+Control+4 workspace number 14, workspace number 4
+bindsym $mod+Control+5 workspace number 15, workspace number 5
+bindsym $mod+Control+6 workspace number 16, workspace number 6
+bindsym $mod+Control+7 workspace number 17, workspace number 7
+bindsym $mod+Control+8 workspace number 18, workspace number 8
+bindsym $mod+Control+9 workspace number 19, workspace number 9
+bindsym $mod+Control+0 workspace number 20, workspace number 10
 
 #####
 #
@@ -200,13 +271,14 @@ bindsym $mod+Shift+y exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+#bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+#bindsym $mod+Shift+r restart
 
 # lock i3
 bindsym $mod+Control+Return exec "sudo xset +dpms && xset s on; i3lock -c 000000"
+#bindsym $mod+Control+Return exec "sudo xset +dpms && xset s on; i3lock -i ~/.local/share/wallpapper.png"
 
 #####
 #
@@ -218,9 +290,11 @@ bindsym $mod+Control+Return exec "sudo xset +dpms && xset s on; i3lock -c 000000
 # finds out, if available)
 bar {
     font pango:文泉驿等宽微米黑 8
-    position top
-    tray_output primary
+    position bottom
+    tray_output $output_main
+#    status_command SCRIPT_DIR=/usr/lib/i3blocks i3blocks
     status_command i3status -c ~/.i3/config.status
+#    status_command python3 ~/.i3/config.pystatus
 }
 
 ####
@@ -251,8 +325,11 @@ bindsym $mod+r mode "resize"
 #
 ######
 
-for_window [window_role="pop-up"] floating enable
+#for_window [class="^(?!(Chromium)|(Gnome-terminal)).*" ] floating enable
+#for_window [window_role="pop-up" instance="^(?!crx_eggkanocgddhmamlbiijnphhppkpkmkl).*$"] floating enable
 
+for_window [title="^Android Emulator"] floating enable
+for_window [title="CopyQ"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="qiv"] floating enable
 for_window [class="Eog"] floating enable
@@ -261,10 +338,36 @@ for_window [class="MPlayer"] floating enable
 for_window [class="Empathy"] floating enable
 for_window [class="VirtualBox"] floating enable
 for_window [class="screengrab"] floating enable
+for_window [class="zoom"] floating enable
+for_window [class="Kalu"] floating enable
+for_window [class="Evolution-alarm-notify"] floating enable
 for_window [class="Nightingale"] floating enable
+for_window [class="Corebird"] floating enable
 for_window [class="Gnome-mplayer"] floating enable
 for_window [class="Gnome-screenshot"] floating enable
 for_window [class="^Nautilus$" instance="^file_progress$"] floating enable
+for_window [class="Wine" instance="TeamViewer.exe"] floating enable
+for_window [class="Skype" instance="skype"] floating enable
+for_window [class="skypeforlinux" instance="skypeforlinux"] floating enable
+for_window [class="Firefox" instance="Firebug"] floating enable
+for_window [instance="sun-awt-X11-XDialogPeer"] floating enable
+for_window [instance="sun-awt-X11-XFramePeer"] floating enable
+for_window [class="Firefox" instance="Devtools"] floating enable
+for_window [class="Slack" instance="slack"] floating enable
+for_window [class="Wine" instance="wechat.exe"] floating enable
+for_window [class="TeamViewer" instance="TeamViewer"] floating enable
+for_window [class="Bijiben" instance="bijiben"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [instance="simplescreenrecorder"] floating enable
+for_window [instance="gnome-calculator"] floating enable
+for_window [instance="xpad"] floating enable
+for_window [instance="alsa-tray"] floating enable
+#for_window [instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] focus
+for_window [instance="crx_nckgahadagoaajjgafhacjanaoiihapd"] floating disable
+for_window [instance="crx_hfilbmblidibnmifcabmolhlaekpfhak"] floating enable
+#for_window [instance="crx_eggkanocgddhmamlbiijnphhppkpkmkl"] floating disable
+#for_window [instance="crx_eggkanocgddhmamlbiijnphhppkpkmkl"] floating enable
+for_window [class="jetbrains-phpstorm" instance="jetbrains-phpstorm" title="win0"] floating enable
 
 ###
 #
@@ -272,10 +375,21 @@ for_window [class="^Nautilus$" instance="^file_progress$"] floating enable
 #
 ###
 
-exec --no-startup-id nm-applet
-exec --no-startup-id volumeicon
+#exec --no-startup-id nm-applet
+exec --no-startup-id xrandr --output eDP1 --primary
+exec --no-startup-id mpd ~/.config/mpd/mpd.conf
+exec --no-startup-id compton -b
+#exec --no-startup-id volumeicon
+#exec --no-startup-id ibus-daemon --xim -d -r
+exec --no-startup-id fcitx -d
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &>/dev/null &
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
+exec_always --no-startup-id gnome-power-manager
+exec --no-startup-id gnome-flashback
+exec --no-startup-id /usr/lib/vino/vino-server
+#exec --no-startup-id xpad
+#exec --no-startup-id python /usr/bin/rofication-daemon.py
 exec --no-startup-id sh ~/.fehbg
-exec --no-startup-id ibus-daemon --xim -d -r
 
 ####
 #
@@ -284,10 +398,83 @@ exec --no-startup-id ibus-daemon --xim -d -r
 ####
 
 # show gnome logout dialog
-bindsym $mod+Shift+q exec gnome-session-quit --logout
+#bindsym $mod+Shift+q exec gnome-session-quit --logout
 
 # show gnome shutdown menu
-bindsym $mod+Shift+s exec gnome-session-quit --power-off
+#bindsym $mod+Shift+s exec gnome-session-quit --power-off
 
 # use gnome-screensaver lock screen
 bindsym $mod+Shift+n exec gnome-screensaver-command -l
+
+#exec --no-startup-id "i3-msg 'workspace 10; append_layout ~/.i3/workspace-10.json'"
+
+##
+# move floating windows with keys
+bindsym $mod+Control+m mode "move" focus floating
+
+mode "move" {
+    bindsym $mod+Tab focus right
+
+    bindsym Left  move left
+    bindsym Down  move down
+    bindsym Up    move up
+    bindsym Right move right
+
+    bindsym h     move left
+    bindsym j     move down
+    bindsym k     move up
+    bindsym l     move right
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+#gaps inner 15
+#gaps outer 0
+
+focus_on_window_activation focus
+
+show_marks yes
+
+###############################################
+##
+## Multi-Monitors Handling
+##
+##############################################
+
+workspace 1 output $output_main
+workspace 2 output $output_main
+workspace 3 output $output_main
+workspace 4 output $output_main
+workspace 5 output $output_main
+workspace 6 output $output_main
+workspace 7 output $output_main
+workspace 8 output $output_main
+workspace 9 output $output_main
+workspace 10 output $output_main
+
+workspace 11 output $output_aside
+workspace 12 output $output_aside
+workspace 13 output $output_aside
+workspace 14 output $output_aside
+workspace 15 output $output_aside
+workspace 16 output $output_aside
+workspace 17 output $output_aside
+workspace 18 output $output_aside
+workspace 19 output $output_aside
+workspace 20 output $output_aside
+
+#bindsym $mod+z focus output $output_aside
+#bindsym $mod+Shift+z focus output $output_main
+
+bindsym $mod+x move container to output $output_aside
+bindsym $mod+Shift+x move container to output $output_main
+
+bindsym $mod+c move workspace to output $output_aside
+bindsym $mod+Shift+c move workspace to output $output_main
+
+
+# Sreen brightness controls
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness

@@ -1,0 +1,1 @@
+/home/weynhamz/Workspace/i3/i3-layout-manager/layout_manager.sh

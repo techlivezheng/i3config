@@ -1,0 +1,60 @@
+{
+  "border": "normal",
+  "floating": "auto_off",
+  "layout": "splitv",
+  "percent": 1,
+  "type": "con",
+  "nodes": [
+    {
+      "floating": "auto_off",
+      "border": "normal",
+      "layout": "splith",
+      "percent": 0.75,
+      "type": "con",
+      "nodes": [
+        {
+          "border": "normal",
+          "floating": "auto_off",
+          "percent": 0.2,
+          "swallows": [
+            {
+              "instance": "crx_eggkanocgddhmamlbiijnphhppkpkmkl"
+            }
+          ],
+          "type": "con"
+        },
+        {
+          "layout": "tabbed",
+          "percent": 0.8,
+          "type": "con",
+          "nodes": [
+            {
+              "border": "normal",
+              "floating": "auto_off",
+              "swallows": [
+                {
+                  "instance": "^(?!crx_eggkanocgddhmamlbiijnphhppkpkmkl).*$"
+                }
+              ],
+              "type": "con"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "layout": "splith",
+      "percent": 0.25,
+      "type": "con",
+      "nodes": [{
+          "border": "normal",
+          "floating": "auto_off",
+          "swallows": [
+            {
+              "instance": "^gnome-terminal-server$"
+            }
+          ]
+      }]
+    }
+  ]
+}
